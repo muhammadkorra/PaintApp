@@ -5,11 +5,25 @@
  */
 package Qombo.Paint.GUI;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.Shape;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author lo2ay
  */
 public class MainGUI extends javax.swing.JFrame {
+    
+    private static void log(String str){
+        System.out.println(str);
+    }
+
+    List<Shape> shapes = new ArrayList();
+    int pressX,pressY,releaseX,releaseY;
 
     /**
      * Creates new form MainGUI
@@ -31,6 +45,16 @@ public class MainGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        canvas1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                canvas1MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                canvas1MouseReleased(evt);
+            }
+        });
+        canvas1.setSize(600,600);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -44,12 +68,28 @@ public class MainGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addComponent(canvas1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void canvas1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_canvas1MousePressed
+        this.pressX = evt.getX();
+        this.pressY = evt.getY();
+        log("Mouse pressed.");
+    }//GEN-LAST:event_canvas1MousePressed
+
+    private void canvas1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_canvas1MouseReleased
+        this.releaseX=evt.getX();
+        this.releaseY=evt.getY();
+        log("Mouse realeased.");
+        this.shapes.add(new Rectangle(pressX,pressY,releaseX,releaseY));
+        log("Shape created.");
+        this.repaint();
+        log("Shape drawn");
+    }//GEN-LAST:event_canvas1MouseReleased
 
     /**
      * @param args the command line arguments
@@ -85,6 +125,17 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
     }
+
+    @Override
+    public void paint(Graphics g) {
+        this.paintComponents(g);
+        Graphics2D g2 = (Graphics2D) g;
+        for (Shape shape : shapes) {
+            g2.draw(shape);
+        }
+    }
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Canvas canvas1;

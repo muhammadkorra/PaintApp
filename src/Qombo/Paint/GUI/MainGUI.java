@@ -23,6 +23,7 @@ public class MainGUI extends javax.swing.JFrame {
         System.out.println(str);
     }
 
+    Shape currentShape;
     List<Shape> shapes = new ArrayList();
     Point press,release;
     
@@ -49,6 +50,11 @@ public class MainGUI extends javax.swing.JFrame {
 
         canvasFrame.setVisible(true);
 
+        canvasPanel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                canvasPanelMouseDragged(evt);
+            }
+        });
         canvasPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 canvasPanelMousePressed(evt);
@@ -113,6 +119,17 @@ public class MainGUI extends javax.swing.JFrame {
         this.repaint();
         log("Shape drawn");
     }//GEN-LAST:event_canvasPanelMouseReleased
+
+    private void canvasPanelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_canvasPanelMouseDragged
+        // TODO add your handling code here:
+        log ("x = "+evt.getX()+"   y = "+evt.getY());
+        if (this.shapes.contains(this.currentShape)){
+            this.shapes.remove(this.currentShape);
+        }
+        this.currentShape = new Rectangle(this.press, evt.getPoint());
+        this.shapes.add(this.currentShape);
+        this.repaint();
+    }//GEN-LAST:event_canvasPanelMouseDragged
 
     /**
      * @param args the command line arguments

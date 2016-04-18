@@ -5,9 +5,10 @@
  */
 package Qombo.Paint.GUI;
 
+import Qombo.Paint.GeoShapes.Rectangle;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
+import java.awt.Point;
 import java.awt.Shape;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +24,8 @@ public class MainGUI extends javax.swing.JFrame {
     }
 
     List<Shape> shapes = new ArrayList();
-    int pressX,pressY,releaseX,releaseY;
-
+    Point press,release;
+    
     /**
      * Creates new form MainGUI
      */
@@ -86,20 +87,17 @@ public class MainGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
-        this.pressX = evt.getX();
-        this.pressY = evt.getY();
+        this.press = evt.getPoint();
         log("Mouse pressed.");
     }//GEN-LAST:event_jPanel1MousePressed
 
     private void jPanel1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseReleased
-        this.releaseX=evt.getX();
-        this.releaseY=evt.getY();
+        this.release = evt.getPoint();
         log("Mouse realeased.");
-        this.shapes.add(new Rectangle(pressX,pressY,releaseX,releaseY));
+        this.shapes.add(new Rectangle(this.press, this.release));
         log("Shape created.");
         this.repaint();
         log("Shape drawn");
-        log(shapes.size()+"");
     }//GEN-LAST:event_jPanel1MouseReleased
 
     /**

@@ -14,8 +14,8 @@ import static java.lang.Math.*;
  */
 public class Rectangle extends java.awt.Rectangle {
     
-    Point leftUp;
-    Point rightDown;
+    private Point leftUp;
+    private Point rightDown;
     public Rectangle (Point p1, Point p2){
         super();
         int width = abs(p1.x - p2.x);

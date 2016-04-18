@@ -32,6 +32,7 @@ public class MainGUI extends javax.swing.JFrame {
      */
     public MainGUI() {
         initComponents();
+        this.setResizable(false);
     }
 
     /**
@@ -68,11 +69,11 @@ public class MainGUI extends javax.swing.JFrame {
         canvasPanel.setLayout(canvasPanelLayout);
         canvasPanelLayout.setHorizontalGroup(
             canvasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 897, Short.MAX_VALUE)
+            .addGap(0, 1178, Short.MAX_VALUE)
         );
         canvasPanelLayout.setVerticalGroup(
             canvasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 495, Short.MAX_VALUE)
+            .addGap(0, 501, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout canvasFrameLayout = new javax.swing.GroupLayout(canvasFrame.getContentPane());
@@ -100,7 +101,7 @@ public class MainGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(canvasFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         pack();
@@ -118,12 +119,12 @@ public class MainGUI extends javax.swing.JFrame {
         log("Shape created.");
         this.repaint();
         log("Shape drawn");
+        this.currentShape=null;
     }//GEN-LAST:event_canvasPanelMouseReleased
 
     private void canvasPanelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_canvasPanelMouseDragged
         // TODO add your handling code here:
-        log ("x = "+evt.getX()+"   y = "+evt.getY());
-        if (this.shapes.contains(this.currentShape)){
+        if (this.currentShape!=null && this.shapes.contains(this.currentShape)){
             this.shapes.remove(this.currentShape);
         }
         this.currentShape = new Rectangle(this.press, evt.getPoint());
